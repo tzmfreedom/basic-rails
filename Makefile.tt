@@ -1,0 +1,19 @@
+.PHONY: test
+test:
+	bin/rspec .
+
+.PHONY: install
+install:
+	bundle install --path=vendor/bundle
+	bundle binstubs annotate capistrano rubocop sidekiq
+
+.PHONY: run
+run:
+	bundle exec rails s
+
+.PHONY: run_queue
+	bundle exec sidekiq -C config/sidekiq.yml
+
+.PHONY: deploy
+deploy:
+	cap deploy 

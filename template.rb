@@ -81,6 +81,5 @@ RUBY
 environment 'config.action_mailer.delivery_method = :letter_opener_web', env: 'development'
 
 template 'ruby-version.tt', '.ruby-version'
-binstubs = %w(annotate capistrano rubocop sidekiq)
-run_with_clean_bundler_env "bundle binstubs #{binstubs.join(' ')}"
+template 'Makefile.tt'
 apply 'config/template.rb'
