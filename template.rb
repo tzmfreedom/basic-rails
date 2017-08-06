@@ -34,6 +34,7 @@ gem_group :development do
   gem 'factory_girl_rails'
   gem 'letter_opener_web'
   gem "annotate"
+  gem "binding_of_caller"
 end
 
 gem_group :test do
