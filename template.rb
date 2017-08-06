@@ -80,6 +80,7 @@ RUBY
 
 environment 'config.action_mailer.delivery_method = :letter_opener_web', env: 'development'
 
-template 'ruby-version.tt', '.ruby-version'
+template '.gitignore.tt', force: true
+template '.ruby-version.tt', '.ruby-version'
 template 'Makefile.tt'
 apply 'config/template.rb'
