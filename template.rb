@@ -52,8 +52,6 @@ end
 gem 'sidekiq'
 gem 'capistrano-rails'
 gem 'redis'
-gem 'mysql2'
-gem 'pg'
 gem 'kaminari'
 gem 'activerecord-import'
 gem 'dotenv-rails'
