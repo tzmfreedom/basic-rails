@@ -1,3 +1,5 @@
+require 'shellwords'
+
 def add_template_repository_to_source_path
   if __FILE__ =~ %r{\Ahttps?://}
     source_paths.unshift(tempdir = Dir.mktmpdir("rails-template-"))
