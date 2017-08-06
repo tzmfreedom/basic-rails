@@ -6,8 +6,8 @@ Rails Web Application Template
 * Initialize
 
 ```bash
-$ bin/rails new basic-rails -T --skip-bundle --
-$ cd basic-rails
+$ bin/rails new hoge -T --skip-bundle -m https://raw.githubusercontent.com/tzmfreedom/basic-rails/master/template.rb
+$ cd hoge
 ```
 
 ```
