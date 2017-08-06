@@ -49,3 +49,44 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'authlogic'
+
+group :development do
+  gem 'better_errors'
+  gem 'bullet'
+  gem 'stackprof'
+  gem 'memory_profiler'
+  gem 'rack-mini-profiler'
+  gem 'pygments.rb', require: false
+  gem 'benchmark-ips'
+  gem 'factory_girl_rails'
+  gem 'letter_opener_web'
+  gem "annotate"
+  gem "binding_of_caller"
+end
+
+group :test do
+  gem 'rspec-rails'
+  gem "simplecov", :require => false
+end
+
+group :development, :test do
+  gem 'pry'
+  gem 'pry-byebug'
+  gem 'pry-rails'
+  gem 'hirb'
+  gem 'awesome_print'
+end
+
+gem 'sidekiq'
+gem 'capistrano-rails'
+gem 'redis'
+gem 'kaminari'
+gem 'activerecord-import'
+gem 'dotenv-rails'
+gem 'omniauth-facebook'
+gem 'rubocop', require: false
+gem 'devise'
+gem 'draper'
+gem 'activeadmin'
+gem 'inherited_resources'
