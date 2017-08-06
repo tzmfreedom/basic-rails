@@ -30,7 +30,7 @@ gem 'kaminari'
 gem 'activerecord-import'
 gem 'dotenv-rails'
 gem 'omniauth-facebook'
-gem 'rubocop', require: fales
+gem 'rubocop', require: false
 gem 'devise'
 gem 'draper'
 gem 'activeadmin'
