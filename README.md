@@ -22,7 +22,7 @@ This Application have several basic feature.
 * Initialize
 
 ```bash
-$ bin/rails new hoge -T --skip-bundle -m https://raw.githubusercontent.com/tzmfreedom/basic-rails/master/template.rb
+$ bin/rails new hoge --skip-turbolinks -T --skip-bundle -m https://raw.githubusercontent.com/tzmfreedom/basic-rails/master/template.rb
 $ cd hoge
 $ make install # call `bundle install`
 ```
