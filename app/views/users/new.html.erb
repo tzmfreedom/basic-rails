@@ -1,0 +1,11 @@
+<ul>
+  <%= @user.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+</ul>
+<%= form_for @user, url: users_url do |f| %>
+  <%= f.text_field :email %>
+  <%= f.password_field :password %>
+  <%= f.password_field :password_confirmation %>
+  <%= f.submit :submit %>
+<% end %>

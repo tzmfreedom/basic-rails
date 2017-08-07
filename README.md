@@ -62,3 +62,10 @@ $ make deploy
 ```bash
 $ make test
 ```
+
+## Detail
+
+* User Authentication
+
+This application uses [authlogic](https://github.com/binarylogic/authlogic) library
+
