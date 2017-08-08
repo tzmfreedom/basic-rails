@@ -69,3 +69,4 @@ $ make test
 
 This application uses [authlogic](https://github.com/binarylogic/authlogic) library
 
+rails generate bootstrap:install static
