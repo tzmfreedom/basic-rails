@@ -62,6 +62,7 @@ gem 'devise'
 gem 'draper'
 gem 'activeadmin'
 gem 'inherited_resources'
+gem 'twitter-bootstrap-rails'
 
 add_template_repository_to_source_path
 

@@ -6,6 +6,7 @@ test:
 install:
 	bundle install --path=vendor/bundle -j4
 	bundle binstubs annotate capistrano rubocop sidekiq
+	bundle exec rails generate bootstrap:install static
 
 .PHONY: migrate
 migrate:
