@@ -10,4 +10,9 @@ Rails.application.routes.draw do
   post 'login' => 'user_sessions#create'
   get 'logout' => 'user_sessions#destroy'
   resources :users, only: [:new, :create, :edit, :update, :show]
+
+
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
 end

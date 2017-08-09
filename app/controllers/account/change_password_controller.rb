@@ -8,6 +8,7 @@ module Account
       if current_user.update_password(change_password_params)
       else
       end
+      redirect_to root_url
     end
 
     private

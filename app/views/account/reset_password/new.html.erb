@@ -1,3 +1,9 @@
+<ul>
+  <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+  <% end %>
+</ul>
+
 <div class="container contents">
   <%= form_for @user, url: account_reset_password_index_path, html: {class: 'form-horizontal'} do |f| %>
     <div class="form-group">
