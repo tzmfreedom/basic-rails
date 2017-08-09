@@ -1,6 +1,7 @@
 module Account
   class ResetPasswordController < ApplicationController
     def new
+      @user = User.new
     end
 
     def create

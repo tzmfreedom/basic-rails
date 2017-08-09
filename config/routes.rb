@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
-  get 'account/reset_password/new'
-  get 'account/change_password/new'
-
   root 'home#index'
+
+  namespace :account do
+    resources :reset_password, only: [:new, :create]
+    resources :change_password, only: [:new, :create]
+  end
 
   get 'login' => 'user_sessions#new'
   post 'login' => 'user_sessions#create'
