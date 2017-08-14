@@ -27,3 +27,14 @@ run_queue:
 .PHONY: deploy
 deploy:
 	cap deploy 
+
+.PHONY: docker/up
+docker/up: docker/db
+	docker-compose up -d
+
+.PHONY: docker/down
+docker/down:
+	docker-compose down
+
+docker/db:
+	mkdir -p docker/db
