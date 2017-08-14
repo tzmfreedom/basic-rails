@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   namespace :account do
-    resources :reset_password, only: [:new, :create]
+    resources :reset_password, only: [:new, :create, :edit, :update]
     resources :change_password, only: [:new, :create]
   end
 
