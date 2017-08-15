@@ -29,12 +29,13 @@ deploy:
 	cap deploy 
 
 .PHONY: docker/up
-docker/up: docker/db
+docker/up:
 	docker-compose up -d
+
+.PHONY: docker/stop
+docker/stop:
+	docker-compose stop
 
 .PHONY: docker/down
 docker/down:
 	docker-compose down
-
-docker/db:
-	mkdir -p docker/db
