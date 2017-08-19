@@ -3,10 +3,11 @@ test:
 	bin/rspec .
 
 .PHONY: install
-install:
-	bundle install --path=vendor/bundle -j4
+install: bundle
 	bundle binstubs annotate capistrano rubocop sidekiq
 	bundle exec rails generate bootstrap:install static
+	bundle exec rails generate active_admin:install
+	make db/init
 
 .PHONY: bundle
 bundle:
@@ -19,6 +20,9 @@ console:
 .PHONY: server
 server:
 	bundle exec rails server -b 0.0.0.0 -p 3000
+
+.PHONY: db/init
+db/init: db/create db/migrate db/seed
 
 .PHONY: db/migrate
 db/migrate:
