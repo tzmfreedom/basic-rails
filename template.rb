@@ -85,3 +85,5 @@ template '.gitignore.tt', force: true
 template '.ruby-version.tt', '.ruby-version'
 template 'Makefile.tt'
 apply 'config/template.rb'
+
+run_with_clean_bundler_env 'bundle exec cap install'
