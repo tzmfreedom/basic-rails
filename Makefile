@@ -46,7 +46,7 @@ run_queue:
 
 .PHONY: deploy
 deploy:
-	cap deploy 
+	bundle exec cap production deploy 
 
 .PHONY: docker/up
 docker/up:

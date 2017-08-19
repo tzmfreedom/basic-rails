@@ -8,9 +8,9 @@
 # server "db.example.com", user: "deploy", roles: %w{db}
 
 
-server "192.168.33.30", user: "vagrant", roles: %w{app}, ssh_options: {
+server "192.168.33.10", user: "vagrant", roles: %w{app}, ssh_options: {
   password: 'vagrant',
-  port: 2230,
+  port: 2204,
   auth_methods: %w(password)
 }
 
