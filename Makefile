@@ -8,12 +8,19 @@ install:
 	bundle binstubs annotate capistrano rubocop sidekiq
 	bundle exec rails generate bootstrap:install static
 
-.PHONY: migrate
-migrate:
+bundle:
+	bundle install
+
+.PHONY: db/migrate
+db/migrate:
 	bundle exec rake db:migrate
 
-.PHONY: seed
-seed:
+.PHONY: db/create
+db/create:
+	bundle exec rake db:create
+
+.PHONY: db/seed
+db/seed:
 	bundle exec rake db:seed
 
 .PHONY: run
