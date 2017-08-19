@@ -89,7 +89,6 @@ gem 'rubocop', require: false
 gem 'devise'
 gem 'draper'
 gem 'activeadmin'
-gem 'inherited_resources'
 # gem 'therubyracer'
 # gem 'less-rails'
 gem 'twitter-bootstrap-rails'
