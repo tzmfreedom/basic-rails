@@ -61,13 +61,13 @@ group :development do
   gem 'benchmark-ips'
   gem 'factory_girl_rails'
   gem 'letter_opener_web'
-  gem "annotate"
-  gem "binding_of_caller"
+  gem 'annotate'
+  gem 'binding_of_caller'
 end
 
 group :test do
   gem 'rspec-rails'
-  gem "simplecov", :require => false
+  gem 'simplecov', :require => false
 end
 
 group :development, :test do
@@ -93,3 +93,4 @@ gem 'inherited_resources'
 # gem 'therubyracer'
 # gem 'less-rails'
 gem 'twitter-bootstrap-rails'
+gem 'mysql2'
