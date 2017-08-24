@@ -5,4 +5,4 @@ RUN mkdir /myapp
 WORKDIR /myapp
 ADD Gemfile Gemfile.lock /myapp/
 RUN bundle install
-# ADD . /myapp
+ADD . /myapp

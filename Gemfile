@@ -80,6 +80,7 @@ end
 
 gem 'sidekiq'
 gem 'capistrano-rails'
+gem 'capistrano-rbenv'
 gem 'redis'
 gem 'kaminari'
 gem 'activerecord-import'
@@ -89,7 +90,6 @@ gem 'rubocop', require: false
 gem 'devise'
 gem 'draper'
 gem 'activeadmin'
-# gem 'therubyracer'
 # gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 gem 'mysql2'

@@ -34,3 +34,6 @@ set :repo_url, "git@github.com:tzmfreedom/basic-rails.git"
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
+
+set :rbenv_type, :user # or :system, depends on your rbenv setup
+set :rbenv_ruby, File.read('.ruby-version').strip
