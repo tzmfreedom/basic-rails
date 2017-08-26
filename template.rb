@@ -64,6 +64,7 @@ gem 'activeadmin'
 gem 'inherited_resources'
 gem 'twitter-bootstrap-rails'
 gem 'redis-rails'
+gem 'therubyracer'
 
 add_template_repository_to_source_path
 

@@ -196,6 +196,7 @@ GEM
       actionmailer (>= 3.2)
       letter_opener (~> 1.0)
       railties (>= 3.2)
+    libv8 (3.16.14.19-x86_64-linux)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -314,6 +315,7 @@ GEM
       redis-store (>= 1.2, < 2)
     redis-store (1.3.0)
       redis (>= 2.2)
+    ref (2.0.0)
     request_store (1.3.2)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
@@ -385,6 +387,9 @@ GEM
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
     stackprof (0.2.10)
+    therubyracer (0.12.3)
+      libv8 (~> 3.16.14.15)
+      ref
     thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
@@ -460,6 +465,7 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   sqlite3
   stackprof
+  therubyracer
   turbolinks (~> 5)
   twitter-bootstrap-rails
   tzinfo-data
@@ -467,4 +473,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.14.6
+   1.15.3

@@ -48,6 +48,10 @@ run_queue:
 deploy:
 	bundle exec cap production deploy 
 
+.PHONY: docker/build
+docker/build:
+	docker-compose build
+
 .PHONY: docker/up
 docker/up:
 	docker-compose up -d
