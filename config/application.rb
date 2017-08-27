@@ -29,5 +29,6 @@ module BasicRails
     config.generators.system_tests = nil
     config.cache_store = :redis_store, ENV['CACHE_STORE_URI'], { expires_in: 90.minutes }
     config.session_store :redis_store, servers: [ENV['SESSION_STORE_URI']]
+    config.active_job.queue_adapter = :sidekiq
   end
 end
