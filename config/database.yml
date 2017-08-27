@@ -16,5 +16,8 @@ test:
   <<: *default
 
 production:
-  <<: *default
+  adapter: postgresql
+  timeout: 5000
+  encoding: utf8
+  reconnect: false
 

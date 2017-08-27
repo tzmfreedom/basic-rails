@@ -5,6 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+ruby "2.4.1"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.3'
@@ -94,3 +95,4 @@ gem 'activeadmin'
 gem 'twitter-bootstrap-rails'
 gem 'mysql2'
 gem 'redis-rails'
+gem 'pg'

@@ -91,3 +91,17 @@ docker/migrate:
 .PHONY: docker/seed
 docker/seed:
 	docker-compose run app bin/rake db:seed
+
+.PHONY: heroku
+heroku:
+ifeq ($(shell command -v heroku 2>/dev/null),)
+	brew install heroku
+endif
+
+.PHONY: heroku/deploy
+heroku/deploy: heroku
+	git push heroku master
+
+.PHONY: heroku/create
+heroku/create: heroku
+	heroku apps:create $(APP_NAME)
