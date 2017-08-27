@@ -1,3 +1,6 @@
+APP_PORT := 3000
+RUBY_VERSION := $(shell cat .ruby-version)
+
 .PHONY: test
 test:
 	bin/rspec .
@@ -9,9 +12,26 @@ install: bundle
 	bundle exec rails generate active_admin:install
 	make db/init
 
+.PHONY: install/ruby
+install/ruby: install/rbenv
+ifneq ($(shell rbenv version 2> /dev/null | grep $(RUBY_VERSION)), $(RUBY_VERSION))
+	rbenv install $(RUBY_VERSION)
+endif
+
+.PHONY: install/rbenv
+install/rbenv:
+ifeq ($(shell command -v rbenv 2> /dev/null),)
+	git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
+	git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+endif
+
 .PHONY: bundle
-bundle:
-	bundle install
+bundle: install/bundler
+	bundle install --path vendor/bundle -j4
+
+.PHONY: install/bundler
+install/bundler:
+	gem install bundler
 
 .PHONY: console
 console:
@@ -19,7 +39,7 @@ console:
 
 .PHONY: server
 server:
-	bundle exec rails server -b 0.0.0.0 -p 3000
+	bundle exec rails server -b 0.0.0.0 -p $(APP_PORT)
 
 .PHONY: db/init
 db/init: db/create db/migrate db/seed
