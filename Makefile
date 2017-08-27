@@ -86,4 +86,8 @@ docker/down:
 
 .PHONY: docker/migrate
 docker/migrate:
-	docker-compose run app bin/rake db:create db:migrate db:seed
+	docker-compose run app bin/rake db:create db:migrate
+
+.PHONY: docker/seed
+docker/seed:
+	docker-compose run app bin/rake db:seed
