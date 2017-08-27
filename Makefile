@@ -83,3 +83,7 @@ docker/stop:
 .PHONY: docker/down
 docker/down:
 	docker-compose down
+
+.PHONY: docker/migrate
+docker/migrate:
+	docker-compose run app bin/rake db:create db:migrate db:seed
