@@ -105,3 +105,26 @@ heroku/deploy: heroku
 .PHONY: heroku/create
 heroku/create: heroku
 	heroku apps:create $(APP_NAME)
+	heroku addons:create heroku-postgres
+	heroku addons:create heroku-redis 
+	heroku addons:create papertrail 
+
+.PHONY: heroku/console
+heroku/console: heroku
+	heroku run bash
+
+.PHONY: heroku/migrate
+heroku/migrate: heroku
+	heroku run bundle exec rake db:migrate
+
+.PHONY: heroku/seed
+heroku/seed: heroku
+	heroku run bundle exec rake db:seed
+
+.PHONY: heroku/logs
+heroku/logs: heroku
+	heroku logs
+
+.PHONY: heroku/db/console
+heroku/db/console: heroku
+	heroku pg:psql
