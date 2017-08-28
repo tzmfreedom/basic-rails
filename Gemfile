@@ -56,14 +56,14 @@ group :development do
   gem 'rack-mini-profiler'
   gem 'pygments.rb', require: false
   gem 'benchmark-ips'
-  gem 'factory_girl_rails'
   gem 'letter_opener_web'
-  gem 'annotate'
+  gem 'annotate', require: false
   gem 'binding_of_caller'
 end
 
 group :test do
   gem 'rspec-rails'
+  gem 'factory_girl_rails'
   gem 'simplecov', :require => false
 end
 

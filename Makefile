@@ -3,7 +3,7 @@ RUBY_VERSION := $(shell cat .ruby-version)
 
 .PHONY: test
 test:
-	bin/rspec .
+	bundle exec rspec
 
 .PHONY: install
 install: bundle
@@ -47,10 +47,12 @@ db/init: db/create db/migrate db/seed
 .PHONY: db/migrate
 db/migrate:
 	bundle exec rake db:migrate
+	bundle exec annotate
 
 .PHONY: db/create
 db/create:
 	bundle exec rake db:create
+	RAILS_ENV=test bundle exec rake db:create
 
 .PHONY: db/seed
 db/seed:
