@@ -78,6 +78,10 @@ docker/build:
 docker/up:
 	docker-compose up -d
 
+.PHONY: docker/db/up
+docker/db/up:
+	docker-compose up -d mysql redis
+
 .PHONY: docker/stop
 docker/stop:
 	docker-compose stop

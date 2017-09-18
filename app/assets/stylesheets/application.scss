@@ -1,0 +1,109 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree ./main
+ *= require_self
+ */
+
+/* --------------------------------
+ *  * base
+ *   * -------------------------------- */
+html {
+    font-size: 62.5%; }
+
+body {
+    color: #333;
+    font-size: 1.2rem;
+    font-family: "Hiragino Kaku Gothic ProN",  Meiryo,  sans-serif; }
+
+*, *::before, *::after {
+    box-sizing: border-box; }
+
+a:link, a:visited, a:hover, a:active {
+    color: #d03c56;
+    text-decoration: none; }
+
+.header, .footer {
+    text-align: center;
+    width: 100%;
+    padding: 15px;
+    background-color: #2d3d54;
+    ul {
+        list-style-type: none;
+    }
+    ul > li {
+        display: inline-block;
+    }
+    ul > li + li {
+        margin-left: 20px;
+    }
+    .menu {
+        font-size: 1.5rem;
+        color: #fff;
+        transition: color 0.15s;
+    }
+    a.menu:hover {
+        color: red;
+    }
+}
+
+.contents {
+    width: 800px;
+    margin: 20px auto;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+}
+
+form {
+    .form-block {
+        display: flex;
+        width: 80%;
+    }
+    .label {
+        font-size: 1.5rem;
+        color: #000;
+        font-weight: bold;
+        margin-right: 20px;
+        line-height: 1.5rem;
+    }
+    .text-input-box {
+        position: relative;
+        flex: 1;
+        border: 1px solid #ccc;
+        height: 35px;
+        padding-left: 10px;
+        font-size: 1.5rem;
+    }
+    .submit {
+        display: inline-block;
+        width: 100px;
+        height: 40px;
+        border: 1px solid #ddd;
+        background-color: blue;
+        color: white;
+        font-weight: bold;
+        font-size: 1.5rem;
+    }
+}
+
+.fl {
+    float: left;
+}
+
+.clearfix::after {
+    clear: both;
+    content: '';
+    display: block;
+}
