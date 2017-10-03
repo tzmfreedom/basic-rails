@@ -1,20 +1,23 @@
 default: &default
-  adapter: mysql2
-  username: <%= ENV.fetch("POSTGRES_USERNAME") %>
-  password: <%= ENV.fetch("MYSQL_PASSWORD") %>
-  host: <%= ENV.fetch("MYSQL_HOSTNAME") %>
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  database: <%= ENV.fetch("MYSQL_DATABASE") %>
+  adapter: pg
+  username: <%= ENV.fetch("POSTGRES_USERNAME", "") %>
+  password: <%= ENV.fetch("POSTGRES_PASSWORD", "") %>
+  host: <%= ENV.fetch("POSTGRES_HOSTNAME", "") %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS", "") { 5 } %>
+  database: <%= ENV.fetch("POSTGRES_DATABASE", "") %>
   timeout: 5000
   encoding: utf8
   reconnect: false
 
 development:
   <<: *default
+  database: development
 
 test:
   <<: *default
+  database: test
 
 production:
   <<: *default
+  database: production
 

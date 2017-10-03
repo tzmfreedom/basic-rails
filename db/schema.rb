@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170819120928) do
+ActiveRecord::Schema.define(version: 20171003022254) do
 
-  create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
     t.string "resource_type"
-    t.bigint "resource_id"
+    t.integer "resource_id"
     t.string "author_type"
-    t.bigint "author_id"
+    t.integer "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20170819120928) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
-  create_table "admin_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "admin_users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -43,27 +43,28 @@ ActiveRecord::Schema.define(version: 20170819120928) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "email"
-    t.string "crypted_password"
-    t.string "password_salt"
-    t.string "persistence_token"
-    t.string "single_access_token"
-    t.string "perishable_token"
-    t.integer "login_count", default: 0, null: false
-    t.integer "failed_login_count", default: 0, null: false
-    t.datetime "last_request_at"
-    t.datetime "current_login_at"
-    t.datetime "last_login_at"
-    t.string "current_login_ip"
-    t.string "last_login_ip"
-    t.boolean "active", default: false
-    t.boolean "confirmed", default: false
+  create_table "social_profiles", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "uid"
+    t.string "provider"
+    t.string "nickname"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["perishable_token"], name: "index_users_on_perishable_token", unique: true
-    t.index ["persistence_token"], name: "index_users_on_persistence_token", unique: true
-    t.index ["single_access_token"], name: "index_users_on_single_access_token", unique: true
+    t.index ["user_id"], name: "index_social_profiles_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "nickname"
+    t.string "email"
+    t.string "password_digest"
+    t.boolean "active", default: true
+    t.boolean "email_verified", default: false, null: false
+    t.string "email_verify_token"
+    t.datetime "email_verify_token_sent_at"
+    t.string "reset_password_token"
+    t.datetime "reset_password_token_sent_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
