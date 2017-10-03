@@ -26,13 +26,34 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
+
+gem 'sidekiq'
+gem 'capistrano-rails'
+gem 'capistrano-rbenv'
+gem 'redis'
+gem 'kaminari'
+gem 'activerecord-import'
+gem 'dotenv-rails'
+# gem 'omniauth-facebook'
+# gem 'omniauth-twitter'
+gem 'rubocop', require: false
+gem 'draper'
+gem 'activeadmin'
+gem 'redis-rails'
+gem 'mysql2'
+# gem 'pg'
 
 
 group :development, :test do
-  gem 'sqlite3'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+
+  gem 'pry'
+  gem 'pry-byebug'
+  gem 'pry-rails'
+  gem 'hirb'
+  gem 'awesome_print'
 end
 
 group :development do
@@ -42,13 +63,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'authlogic'
-
-group :development do
   gem 'better_errors'
   gem 'bullet'
   gem 'stackprof'
@@ -61,34 +76,11 @@ group :development do
   gem 'binding_of_caller'
 end
 
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
 group :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'simplecov', :require => false
 end
-
-group :development, :test do
-  gem 'pry'
-  gem 'pry-byebug'
-  gem 'pry-rails'
-  gem 'hirb'
-  gem 'awesome_print'
-end
-
-gem 'sidekiq'
-gem 'capistrano-rails'
-gem 'capistrano-rbenv'
-gem 'redis'
-gem 'kaminari'
-gem 'activerecord-import'
-gem 'dotenv-rails'
-gem 'omniauth-facebook'
-gem 'rubocop', require: false
-gem 'devise'
-gem 'draper'
-gem 'activeadmin'
-# gem 'less-rails'
-gem 'twitter-bootstrap-rails'
-gem 'mysql2'
-gem 'redis-rails'
-gem 'pg'
