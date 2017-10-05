@@ -1,0 +1,32 @@
+<div class="register">
+  <% if @user.errors.any? %>
+      <ul class="register__errors">
+        <% @user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+      </ul>
+  <% end %>
+  <%= form_with model: @user, url: user_url(:me), class: 'register__form', local: true do |f| %>
+      <table>
+        <tr>
+          <td class="register__form-label">
+            <%= f.label :password, class: 'register__password-label' %>
+          </td>
+          <td class="register__form-input">
+            <%= f.password_field :password, class: 'register__password' %>
+            <p class="register__form-attention">※パスワードは8文字以上で入力してください</p>
+          </td>
+        </tr>
+        <tr>
+          <td class="register__form-label"><%= f.label :password_confirmation,
+                                                       class: 'register__email-label' %></td>
+          <td class="register__form-input">
+            <%= f.password_field :password_confirmation,
+                                 class: 'register__password-confirmation' %>
+            <p class="register__form-attention">※上で入力したパスワードを再度入力してください</p>
+          </td>
+        </tr>
+      </table>
+      <%= f.submit '登録する', class: 'register__submit' %>
+  <% end %>
+</div>

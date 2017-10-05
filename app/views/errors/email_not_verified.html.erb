@@ -1,0 +1,6 @@
+<div class="error-message-common__wrapper">
+  <div class="error-message-common__message">
+    <%= simple_format @error_message %>
+    <%= link_to 'メールアドレス確認メールを再送信する', email_verify_token_url, method: :post %>
+  </div>
+</div>

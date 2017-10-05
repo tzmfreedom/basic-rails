@@ -1,11 +1,56 @@
-<ul>
-  <%= @user.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
+<div class="register">
+  <% if @form.errors.any? %>
+      <ul class="register__errors">
+        <% @form.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+      </ul>
   <% end %>
-</ul>
-<%= form_for @user, url: users_url do |f| %>
-  <%= f.text_field :email %>
-  <%= f.password_field :password %>
-  <%= f.password_field :password_confirmation %>
-  <%= f.submit :submit %>
+  <%= form_with model: @form, url: users_url, class: 'register__form', local: true do |f| %>
+      <table>
+        <tr>
+          <td class="register__form-label"><%= f.label :email, class: 'register__email-label' %></td>
+          <td class="register__form-input"><%= f.email_field :email, class: 'register__email' %></td>
+        </tr>
+        <% if params[:provider].nil? %>
+            <tr>
+              <td class="register__form-label">
+                <%= f.label :password, class: 'register__password-label' %>
+              </td>
+              <td class="register__form-input">
+                <%= f.password_field :password, class: 'register__password' %>
+                <p class="register__form-attention">※パスワードは8文字以上で入力してください</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="register__form-label"><%= f.label :password_confirmation,
+                                                           class: 'register__email-label' %></td>
+              <td class="register__form-input">
+                <%= f.password_field :password_confirmation,
+                                     class: 'register__password-confirmation' %>
+                <p class="register__form-attention">※上で入力したパスワードを再度入力してください</p>
+              </td>
+            </tr>
+        <% end %>
+      </table>
+      <p>アカウントを作成すると、<%= link_to '利用規約', terms_url %>、および<%= link_to 'プライバシーポリシー', privacy_url %>に同意したことになります。
+      </p>
+      <%= hidden_field_tag :provider, params[:provider] if params[:provider].present? %>
+      <%= f.submit '登録する', class: 'register__submit' %>
+      <div class="login__social">
+        <span>他のサービスで登録</span>
+        <%= link_to '/auth/twitter', class: 'login__social-button clearfix' do %>
+            <i class="fa fa-twitter login__twitter-icon"></i>
+            <div class="login__twitter-text">Twitterで登録・ログイン</div>
+        <% end %>
+        <%= link_to '/auth/facebook', class: 'login__social-button clearfix' do %>
+            <i class="fa fa-facebook login__facebook-icon"></i>
+            <div class="login__facebook-text">facebookで登録・ログイン</div>
+        <% end %>
+        <%= link_to '/auth/line', class: 'login__social-button clearfix' do %>
+            <img src="/images/btn_base.png" class="login__line-icon" >
+            <div class="login__line-text">LINEで登録・ログイン</div>
+        <% end %>
+      </div>
 <% end %>
+</div>

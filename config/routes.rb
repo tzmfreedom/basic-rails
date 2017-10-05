@@ -3,15 +3,24 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   root 'home#index'
 
-  namespace :account do
-    resources :reset_password, only: [:new, :create, :edit, :update]
-    resources :change_password, only: [:new, :create]
-  end
-
   get 'login' => 'user_sessions#new'
   post 'login' => 'user_sessions#create'
   get 'logout' => 'user_sessions#destroy'
-  resources :users, only: [:new, :create, :edit, :update, :show]
+  get 'terms' => 'static_pages#terms'
+  get 'privacy' => 'static_pages#privacy'
+  post 'email_verify_token' => 'email_verify_token#create'
+
+  resources :email_verify, only: [:show]
+
+  resources :users, only: [:new, :create, :update, :show] do
+    get 'complete', on: :collection
+  end
+
+  resources :reset_password, only: [:new, :create, :edit, :update] do
+    get 'complete', on: :collection
+  end
+
+  get '/auth/:provider/callback' => 'sessions#create'
 
 
   if Rails.env.development?

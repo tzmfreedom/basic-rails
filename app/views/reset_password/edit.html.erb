@@ -1,0 +1,17 @@
+<div class="reset-password">
+  <h2 class="reset-password__title">パスワード変更画面</h2>
+  <%= form_with model: @user, url: reset_password_url(params[:id]), class: 'reset-password__form', local: true do |f| %>
+      <table class="reset-password__table">
+        <tr>
+          <td class="reset-password__form-label"><%= f.label :password, class: 'reset-password__password-label' %></td>
+          <td class="reset-password__form-input"><%= f.password_field :password, class: 'reset-password__password' %></td>
+        </tr>
+        <tr>
+          <td class="reset-password__form-label"><%= f.label :password_confirmation, class: 'reset-password_password-label' %></td>
+          <td class="reset-password__form-input"><%= f.password_field :password_confirmation, class: 'reset-password__password' %></td>
+        </tr>
+      </table>
+      <%= hidden_field_tag :email, @user.email %>
+      <%= f.submit 'パスワードを更新する', class: 'reset-password__submit' %>
+  <% end %>
+</div>

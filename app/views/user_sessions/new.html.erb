@@ -1,34 +1,37 @@
-<ul>
-  <% @user_session.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
+<div class="login">
+  <% if @login_form.errors.any? %>
+      <ul class="login__errors">
+        <% @login_form.errors.full_messages.each do |msg| %>
+            <li><%= simple_format msg %></li>
+        <% end %>
+      </ul>
   <% end %>
-</ul>
-
-<div class="container contents">
-  <%= form_for @user_session, url: login_url, html: {class: 'form-horizontal'} do |f| %>
-      <div class="form-group">
-        <%= f.label :email, class: 'control-label col-sm-2' %>
-        <div class="col-sm-10">
-          <%= f.email_field :email, class: 'form-control', placeholder: 'Enter email' %>
-        </div>
-      </div>
-      <div class="form-group">
-        <%= f.label :password, class: 'control-label col-sm-2' %>
-        <div class="col-sm-10">
-          <%= f.password_field :password, class: 'form-control', placeholder: 'Enter password' %>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-          <div class="checkbox">
-            <label class="control-label"><%= f.check_box :remember_me %>Remember Me</label>
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-          <%= f.submit :submit %>
-        </div>
+  <%= form_with model: @login_form, url: login_url, class: 'login__form', local: true do |f| %>
+      <table>
+        <tr>
+          <td class="login__form-label"><%= f.label :email %></td>
+          <td class="login__form-input"><%= f.email_field :email, class: 'login__email-form' %></td>
+        </tr>
+        <tr>
+          <td class="login__form-label"><%= f.label :password %></td>
+          <td class="login__form-input"><%= f.password_field :password, class: 'login__password-form' %></td>
+        </tr>
+      </table>
+      <%= f.submit 'ログイン', class: 'login__submit'  %>
+      <div class="login__social">
+        <span>他のサービスでログイン</span>
+        <%= link_to '/auth/twitter', class: 'login__social-button clearfix' do %>
+            <i class="fa fa-twitter login__twitter-icon"></i>
+            <div class="login__twitter-text">Twitterで登録・ログイン</div>
+        <% end %>
+        <%= link_to '/auth/facebook', class: 'login__social-button clearfix' do %>
+            <i class="fa fa-facebook login__facebook-icon"></i>
+            <div class="login__facebook-text">facebookで登録・ログイン</div>
+        <% end %>
+        <%= link_to '/auth/line', class: 'login__social-button clearfix' do %>
+            <img src="/images/btn_base.png" class="login__line-icon" >
+            <div class="login__line-text">LINEで登録・ログイン</div>
+        <% end %>
       </div>
   <% end %>
 </div>

@@ -10,7 +10,7 @@
 
 server "192.168.33.10", user: "vagrant", roles: %w{app}, ssh_options: {
   password: 'vagrant',
-  port: 2204,
+  port: 2200,
   auth_methods: %w(password)
 }
 

@@ -1,25 +1,27 @@
 class UserSessionsController < ApplicationController
   def new
-    @user_session = UserSession.new
+    @login_form = LoginForm.new
   end
 
   def create
-    @user_session = UserSession.new(user_session_params)
-    if @user_session.save
-      redirect_to root_url
+    @login_form = LoginForm.new(form_params)
+    if @login_form.authenticate
+      reset_session
+      session[:user_id] = @login_form.user_id
+      redirect_to new_obet_url
     else
-      render :action => :new
+      render :new
     end
   end
 
   def destroy
-    current_user_session.destroy
+    reset_session
     redirect_to login_url
   end
 
   private
 
-  def user_session_params
-    params.require(:user_session).permit(:email, :password, :remember_me)
+  def form_params
+    params.require(:login_form).permit(:email, :password)
   end
 end

@@ -1,0 +1,19 @@
+<div class="reset-password">
+  <% if @form.errors.any? %>
+      <ul class="register__errors">
+        <% @form.errors.full_messages.each do |msg| %>
+            <li><%= simple_format msg %></li>
+        <% end %>
+      </ul>
+  <% end %>
+  <h2 class="reset-password__title">パスワードリセットフォーム</h2>
+  <%= form_with model: @form, url: reset_password_index_url, class: 'reset-password__form', local: true do |f| %>
+      <table class="reset-password__table">
+        <tr>
+          <td class="reset-password__form-label"><%= f.label :email, class: 'reset-password__email-label' %></td>
+          <td class="reset-password__form-input"><%= f.email_field :email, class: 'reset-password__email' %></td>
+        </tr>
+      </table>
+      <%= f.submit 'パスワードをリセットする', class: 'reset-password__submit' %>
+  <% end %>
+</div>
