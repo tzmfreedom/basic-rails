@@ -16,8 +16,6 @@
         <% end %>
         <% if current_user %>
           <li><%= link_to 'Logout', logout_path, class: 'menu' %></li>
-          <li><%= link_to 'Change Password', new_account_change_password_path, class: 'menu' %></li>
-          <li><%= link_to 'Reset Password', new_account_reset_password_path, class: 'menu' %></li>
         <% end %>
       </ul>
     </header>
@@ -28,14 +26,6 @@
 
     <footer class="footer">
       <ul>
-        <% unless current_user %>
-            <li><%= link_to 'Login', login_path, class: 'menu' %></li>
-        <% end %>
-        <% if current_user %>
-            <li><%= link_to 'Logout', logout_path, class: 'menu' %></li>
-            <li><%= link_to 'Change Password', new_account_change_password_path, class: 'menu' %></li>
-            <li><%= link_to 'Reset Password', new_account_reset_password_path, class: 'menu' %></li>
-        <% end %>
       </ul>
     </footer>
   </body>

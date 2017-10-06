@@ -1,11 +1,19 @@
 class UserMailer < ApplicationMailer
+  def email_confirmation(user: , token: )
+    @token = token
+    @user = user
+    mail(
+        to: @user.email,
+        subject: "Confirm Registration",
+        from: "noreply@freedom-man.com"
+    )
+  end
 
   def reset_password(user)
-    @edit_password_reset_url = edit_account_reset_password_url(user.perishable_token)
     mail(
         to: user.email,
         subject: "Password Reset Instructions",
-        from: "noreplay@freedom-man.com",
+        from: "noreply@freedom-man.com",
     )
   end
 
@@ -14,7 +22,7 @@ class UserMailer < ApplicationMailer
     mail(
         to: before_mail,
         subject: "Password Change Instructions",
-        from: "noreplay@freedom-man.com",
+        from: "noreply@freedom-man.com",
     )
   end
 end

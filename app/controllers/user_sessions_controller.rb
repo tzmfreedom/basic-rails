@@ -8,7 +8,7 @@ class UserSessionsController < ApplicationController
     if @login_form.authenticate
       reset_session
       session[:user_id] = @login_form.user_id
-      redirect_to new_obet_url
+      redirect_to root_url
     else
       render :new
     end

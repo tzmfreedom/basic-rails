@@ -1,9 +1,12 @@
 class UserRegisterForm
   include ::ActiveModel::Model
 
-  attr_accessor :email, :password, :auth
+  attr_accessor :email, :password, :password_confirmation, :auth
 
   validate :validate_user
+  validates :password, presence: true, if: lambda { |m| m.auth.nil? }
+  validates_confirmation_of :password, if: lambda { |m| m.password.present? }
+  validates_presence_of     :password_confirmation, if: lambda { |m| m.password.present? }
 
   def save
     return false if invalid?

@@ -19,7 +19,7 @@ class ResetPasswordController < ApplicationController
 
   def update
     if @user.save(update_password_params)
-      redirect_to new_obet_url, notice: 'パスワードを更新しました' and return
+      redirect_to root_url, notice: 'パスワードを更新しました' and return
     end
 
     render :edit

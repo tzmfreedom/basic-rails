@@ -8,7 +8,7 @@ class EmailVerifyController < ApplicationController
     if user.verify_email(params[:id])
       reset_session
       session[:user_id] = user.id
-      redirect_to new_obet_url, notice: 'ユーザ登録が完了しました'
+      redirect_to root_url, notice: 'ユーザ登録が完了しました'
     else
       render :show, alert: 'ユーザ登録に失敗しました。問い合わせフォームからお問い合わせください。'
     end

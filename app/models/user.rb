@@ -24,9 +24,6 @@ class User < ActiveRecord::Base
   validates :email, presence: true
   validates :email, uniqueness: true, length: { maximum: 255 }
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
-  validates :password, presence: true, if: lambda { |m| m.auth.nil? }
-  validates_confirmation_of :password, if: lambda { |m| m.password.present? }
-  validates_presence_of     :password_confirmation, if: lambda { |m| m.password.present? }
 
   def email_verify_token_expired?
     email_verify_token_sent_at < 1.day.ago

@@ -42,6 +42,7 @@ class UsersController < ApplicationController
     user_register_params = params.require(:user_register_form)
                                .permit(:email, :password, :password_confirmation)
     auth = session["omniauth.#{params[:provider]}_data"]
-    user_register_params.merge(auth: auth) if auth.present?
+    user_register_params.merge!(auth: auth) if auth.present?
+    user_register_params
   end
 end
