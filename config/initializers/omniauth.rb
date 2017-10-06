@@ -5,5 +5,5 @@ Rails.application.config.middleware.use OmniAuth::Builder do
                :image_size => 'original',
            }
   provider :facebook, ENV['FACEBOOK_KEY'], ENV['FACEBOOK_SECRET'], scope: 'email'
-  provider :line, ENV['LINE_CHANNEL_ID'], ENV['LINE_CHANNEL_SECRET']
+  # provider :line, ENV['LINE_CHANNEL_ID'], ENV['LINE_CHANNEL_SECRET']
 end
