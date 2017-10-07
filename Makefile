@@ -8,7 +8,6 @@ test:
 .PHONY: install
 install: bundle
 	bundle binstubs annotate capistrano rubocop sidekiq
-	bundle exec rails generate bootstrap:install static
 	bundle exec rails generate active_admin:install
 	make db/init
 
@@ -68,7 +67,7 @@ run_queue:
 
 .PHONY: deploy
 deploy:
-	bundle exec cap production deploy 
+	bundle exec cap production deploy
 
 .PHONY: docker/build
 docker/build:
