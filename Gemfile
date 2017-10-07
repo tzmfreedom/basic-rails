@@ -76,6 +76,7 @@ group :development do
   gem 'letter_opener_web'
   gem 'annotate', require: false
   gem 'binding_of_caller'
+  gem 'guard-livereload', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
