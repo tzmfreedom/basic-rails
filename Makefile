@@ -133,3 +133,7 @@ heroku/logs: heroku
 .PHONY: heroku/db/console
 heroku/db/console: heroku
 	heroku pg:psql
+
+.PHONY: guard
+guard:
+	bundle exec guard

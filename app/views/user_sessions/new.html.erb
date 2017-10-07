@@ -7,7 +7,7 @@
       </ul>
   <% end %>
   <%= form_with model: @login_form, url: login_url, class: 'login__form', local: true do |f| %>
-      <table>
+      <table class="login__form-table">
         <tr>
           <td class="login__form-label"><%= f.label :email %></td>
           <td class="login__form-input"><%= f.email_field :email, class: 'login__email-form' %></td>
@@ -17,7 +17,7 @@
           <td class="login__form-input"><%= f.password_field :password, class: 'login__password-form' %></td>
         </tr>
       </table>
-      <%= f.submit 'ログイン', class: 'login__submit'  %>
+      <%= f.submit 'ログイン', class: 'login__form-submit'  %>
       <div class="login__social">
         <span>他のサービスでログイン</span>
         <%= link_to '/auth/twitter', class: 'login__social-button clearfix' do %>
@@ -28,10 +28,12 @@
             <i class="fa fa-facebook login__facebook-icon"></i>
             <div class="login__facebook-text">facebookで登録・ログイン</div>
         <% end %>
+        <!--
         <%= link_to '/auth/line', class: 'login__social-button clearfix' do %>
             <img src="/images/btn_base.png" class="login__line-icon" >
             <div class="login__line-text">LINEで登録・ログイン</div>
         <% end %>
+        -->
       </div>
   <% end %>
 </div>

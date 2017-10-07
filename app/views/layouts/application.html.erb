@@ -3,29 +3,38 @@
   <head>
     <title>BasicRails</title>
     <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" >
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
   </head>
 
   <body>
     <header class="header">
-      <ul>
+      <ul class="header__menu">
         <% unless current_user %>
-          <li><%= link_to 'Login', login_path, class: 'menu' %></li>
+          <li class="header__menu-item">
+            <%= link_to login_path do %>
+              <i class="fa fa-sign-in"></i>
+              <span>Login</span>
+            <% end %>
+          </li>
         <% end %>
         <% if current_user %>
-          <li><%= link_to 'Logout', logout_path, class: 'menu' %></li>
+          <li class="header__menu-item"><%= link_to 'Logout', logout_path, class: 'menu' %></li>
         <% end %>
       </ul>
     </header>
 
-    <div class="contents">
+    <main class="main">
       <%= yield %>
-    </div>
+    </main>
 
     <footer class="footer">
-      <ul>
+      <ul class="footer__menu">
+        <li class="footer__menu-item"><%= link_to 'Terms', terms_path %></li>
+        <li class="footer__menu-item"><%= link_to 'Privacy Policy', privacy_path %></li>
       </ul>
     </footer>
   </body>
