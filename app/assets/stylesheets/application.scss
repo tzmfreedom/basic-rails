@@ -78,7 +78,6 @@ $base-color: #2d3d54;
         justify-content: center;
         font-size: 1.7rem;
         text-align: center;
-        //line-height: $footer-height;
         padding: 10px;
 
         &-item {
@@ -102,8 +101,8 @@ $base-color: #2d3d54;
     padding: 20px;
 
     @include max-screen($breakpoint-mobile) {
-        width: 100%;
         margin: 10px 5px;
+        width: auto;
     }
 
     &__form {
@@ -125,7 +124,6 @@ $base-color: #2d3d54;
         &-input {
             height: $form-row-height;
             width: 400px;
-            border: 1px solid #ddd;
 
             @include max-screen($breakpoint-mobile) {
                 width: 100%;
@@ -136,6 +134,11 @@ $base-color: #2d3d54;
                 width: 100%;
                 padding: 7px;
                 font-size: 1.5rem;
+
+                &:focus {
+                    border: 1px solid $base-color;
+                    outline: none;
+                }
             }
         }
 
