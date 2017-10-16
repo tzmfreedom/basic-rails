@@ -69,6 +69,14 @@ $base-color: #2d3d54;
 .main {
 }
 
+.home {
+    height: calc(100vh - #{$header-height} - #{$footer-height});
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .footer {
     height: $footer-height;
     background-color: $base-color;
