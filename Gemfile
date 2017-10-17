@@ -30,8 +30,6 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'sidekiq'
-gem 'capistrano-rails'
-gem 'capistrano-rbenv'
 gem 'redis'
 gem 'kaminari'
 gem 'activerecord-import'
@@ -44,6 +42,7 @@ gem 'activeadmin'
 gem 'devise'
 gem 'redis-rails'
 gem 'mysql2'
+gem 'unicorn'
 # gem 'pg'
 
 
@@ -77,7 +76,10 @@ group :development do
   gem 'annotate', require: false
   gem 'binding_of_caller'
   gem 'guard-livereload', require: false
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv'
   gem 'capistrano3-puma'
+  gem 'capistrano-bundle_rsync'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
