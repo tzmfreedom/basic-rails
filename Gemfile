@@ -77,6 +77,7 @@ group :development do
   gem 'annotate', require: false
   gem 'binding_of_caller'
   gem 'guard-livereload', require: false
+  gem 'capistrano3-puma'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

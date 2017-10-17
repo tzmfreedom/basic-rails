@@ -14,6 +14,8 @@ server "192.168.33.10", user: "vagrant", roles: %w{app}, ssh_options: {
   auth_methods: %w(password)
 }
 
+set :assets_roles, %w{web app}
+set :linked_files, %w{.env}
 
 # role-based syntax
 # ==================

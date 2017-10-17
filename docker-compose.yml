@@ -4,6 +4,7 @@ services:
     build: .
     volumes:
       - .:/myapp
+      - bundle_install:/myapp/vendor/bundle
     ports:
       - "13000:3000"
     command: bundle exec rails s -p 3000  -b '0.0.0.0'
@@ -37,4 +38,5 @@ volumes:
     driver: local
 #  postgres_db:
 #    driver: local
-    
+  bundle_install:
+    driver: local
