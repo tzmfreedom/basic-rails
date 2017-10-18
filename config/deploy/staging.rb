@@ -7,7 +7,14 @@
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
 
+server "localhost", user: "vagrant", roles: %w{app}
+set :ssh_options, {
+  port: 2222,
+}
 
+
+set :assets_roles, %w{web app}
+set :linked_files, %w{.env}
 
 # role-based syntax
 # ==================
