@@ -78,7 +78,7 @@ group :development do
   gem 'guard-livereload', require: false
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'
-  gem 'capistrano3-puma'
+  # gem 'capistrano3-puma'
   gem 'capistrano-bundle_rsync'
 end
 
