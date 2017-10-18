@@ -69,6 +69,10 @@ run_queue:
 deploy:
 	bundle exec cap production deploy
 
+.PHONY: staging/deploy
+staging/deploy:
+	bundle exec cap staging deploy
+
 .PHONY: docker/build
 docker/build:
 	docker-compose build
@@ -137,3 +141,27 @@ heroku/db/console: heroku
 .PHONY: guard
 guard:
 	bundle exec guard
+
+.PHONY: unicorn/start
+unicorn/start:
+	bundle exec unicorn -c config/unicorn.rb
+
+.PHONY: unicorn/stop
+unicorn/stop:
+	kill -QUIT `cat ./tmp/pids/unicorn.pid`
+
+.PHONY: unicorn/restart
+unicorn/restart:
+	kill -HUP `cat ./tmp/pids/unicorn.pid`
+
+.PHONY: unicorn/restart/graceful
+unicorn/restart/graceful:
+	kill -USR2 `cat ./tmp/pids/unicorn.pid`
+
+.PHONY: unicorn/worker/down
+unicorn/worker/down:
+	kill -TTOU `cat ./tmp/pids/unicorn.pid`
+
+.PHONY: unicorn/worker/up
+unicorn/worker/up:
+	kill -TTIN `cat ./tmp/pids/unicorn.pid`
