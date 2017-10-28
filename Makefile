@@ -91,7 +91,12 @@ docker-sync/start: docker-sync
 
 .PHONY: logs
 logs:
+ifdef NAME
+	$(DOCKER_COMPOSE_COMMAND) logs -f $(NAME)
+else
 	$(DOCKER_COMPOSE_COMMAND) logs -f app
+endif
+
 .PHONY: heroku/deploy
 heroku/deploy: heroku
 	git push heroku master
