@@ -1,6 +1,6 @@
 listen 5000
 worker_processes 2
-pid File.expand_path("../../tmp/pids/unicorn.pid", __FILE__)
+pid File.expand_path("../../../tmp/pids/unicorn.pid", __FILE__)
 timeout 10
 
 # stderr_path File.expand_path("../../log/unicorn_stderr.log", __FILE__)
