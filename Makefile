@@ -1,40 +1,43 @@
+DOCKER_COMPOSE_SUB_COMMAND = down start stop build
+DOCKER_COMPOSE_COMMAND = docker-compose
+DOCKER_COMMAND = docker
 APP_PORT := 3000
 RUBY_VERSION := $(shell cat .ruby-version)
 
 .PHONY: test
 test:
-	bundle exec rspec
+	$(MAKE) run COMMAND="make test"
 
-.PHONY: install
-install: bundle
-	bundle binstubs annotate capistrano rubocop sidekiq
-	bundle exec rails generate active_admin:install
-	make db/init
+.PHONY: init
+init:
+	$(MAKE) db/init
 
-.PHONY: install/ruby
-install/ruby: install/rbenv
-ifneq ($(shell rbenv version 2> /dev/null | grep $(RUBY_VERSION)), $(RUBY_VERSION))
-	rbenv install $(RUBY_VERSION)
-endif
+.PHONY: up
+up: docker-sync/start docker/up
 
-.PHONY: install/rbenv
-install/rbenv:
-ifeq ($(shell command -v rbenv 2> /dev/null),)
-	git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
-	git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-endif
+.PHONY: docker/up
+docker/up:
+	$(DOCKER_COMPOSE_COMMAND) up -d
 
-.PHONY: bundle
-bundle: install/bundler
-	bundle install --path vendor/bundle -j4
+.PHONY: $(DOCKER_COMPOSE_SUB_COMMAND)
+$(DOCKER_COMPOSE_SUB_COMMAND):
+	$(DOCKER_COMPOSE_COMMAND) $@
 
-.PHONY: install/bundler
-install/bundler:
-	gem install bundler
+.PHONY: run
+run:
+	$(DOCKER_COMPOSE_COMMAND) exec spring $(COMMAND)
 
 .PHONY: console
 console:
-	bundle exec rails console
+	$(MAKE) run COMMAND="/bin/bash"
+
+.PHONY: rails/console
+rails/console:
+	$(MAKE) run COMMAND="bundle exec rails console"
+
+.PHONY: bundle
+bundle: install/bundler
+	$(MAKE) run COMMAND="bundle install --path vendor/bundle -j4"
 
 .PHONY: server
 server:
@@ -45,25 +48,15 @@ db/init: db/create db/migrate db/seed
 
 .PHONY: db/migrate
 db/migrate:
-	bundle exec rake db:migrate
-	bundle exec annotate
+	$(MAKE) run COMMAND="bundle exec rake db:migrate; bundle exec annotate"
 
 .PHONY: db/create
 db/create:
-	bundle exec rake db:create
-	RAILS_ENV=test bundle exec rake db:create
+	$(MAKE) run COMMAND="bundle exec rake db:create"
 
 .PHONY: db/seed
 db/seed:
-	bundle exec rake db:seed
-
-.PHONY: run
-run:
-	bundle exec rails s
-
-.PHONY: run_queue
-run_queue:
-	bundle exec sidekiq -C config/sidekiq.yml
+	$(MAKE) run COMMAND="bundle exec rake db:seed"
 
 .PHONY: deploy
 deploy:
@@ -73,40 +66,32 @@ deploy:
 staging/deploy:
 	bundle exec cap staging deploy
 
-.PHONY: docker/build
-docker/build:
-	docker-compose build
-
-.PHONY: docker/up
-docker/up:
-	docker-compose up -d
-
-.PHONY: docker/db/up
-docker/db/up:
-	docker-compose up -d mysql redis
-
-.PHONY: docker/stop
-docker/stop:
-	docker-compose stop
-
-.PHONY: docker/down
-docker/down:
-	docker-compose down
-
-.PHONY: docker/migrate
-docker/migrate:
-	docker-compose run app bin/rake db:create db:migrate
-
-.PHONY: docker/seed
-docker/seed:
-	docker-compose run app bin/rake db:seed
-
 .PHONY: heroku
 heroku:
 ifeq ($(shell command -v heroku 2>/dev/null),)
 	brew install heroku
 endif
 
+.PHONY: guard
+guard:
+	$(MAKE) run COMMAND="bundle exec guard"
+
+.PHONY: docker-sync
+docker-sync:
+ifeq ($(shell command -v docker-sync),)
+	gem install docker-sync
+	brew install unison
+	brew tap eugenmayer/dockersync
+	brew install eugenmayer/dockersync/unox
+endif
+
+.PHONY: docker-sync/start
+docker-sync/start: docker-sync
+	-@docker-sync start
+
+.PHONY: logs
+logs:
+	$(DOCKER_COMPOSE_COMMAND) logs -f app
 .PHONY: heroku/deploy
 heroku/deploy: heroku
 	git push heroku master
@@ -115,8 +100,8 @@ heroku/deploy: heroku
 heroku/create: heroku
 	heroku apps:create $(APP_NAME)
 	heroku addons:create heroku-postgres
-	heroku addons:create heroku-redis 
-	heroku addons:create papertrail 
+	heroku addons:create heroku-redis
+	heroku addons:create papertrail
 
 .PHONY: heroku/console
 heroku/console: heroku
@@ -137,31 +122,3 @@ heroku/logs: heroku
 .PHONY: heroku/db/console
 heroku/db/console: heroku
 	heroku pg:psql
-
-.PHONY: guard
-guard:
-	bundle exec guard
-
-.PHONY: unicorn/start
-unicorn/start:
-	bundle exec unicorn -c config/unicorn.rb
-
-.PHONY: unicorn/stop
-unicorn/stop:
-	kill -QUIT `cat ./tmp/pids/unicorn.pid`
-
-.PHONY: unicorn/restart
-unicorn/restart:
-	kill -HUP `cat ./tmp/pids/unicorn.pid`
-
-.PHONY: unicorn/restart/graceful
-unicorn/restart/graceful:
-	kill -USR2 `cat ./tmp/pids/unicorn.pid`
-
-.PHONY: unicorn/worker/down
-unicorn/worker/down:
-	kill -TTOU `cat ./tmp/pids/unicorn.pid`
-
-.PHONY: unicorn/worker/up
-unicorn/worker/up:
-	kill -TTIN `cat ./tmp/pids/unicorn.pid`

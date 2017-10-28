@@ -1,14 +1,19 @@
 version: '3'
 services:
-  app:
+  app: &base
+    name: docker_app
     build: .
     volumes:
       - .:/myapp
+      - ./tmp/cache:/myapp/tmp/cache
+      - ./log:/myapp/log
       - bundle_install:/myapp/vendor/bundle
+      - sync-volume:/myapp
     ports:
-      - "13000:3000"
-    command: bundle exec rails s -p 3000  -b '0.0.0.0'
+      - "3000:3000"
     environment:
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: password
       MYSQL_HOSTNAME: mysql
       CACHE_STORE_URI: redis://redis:6379/0/cache
       SESSION_STORE_URI: redis://redis:6379/0/session
@@ -21,8 +26,18 @@ services:
 #    environment:
 #      POSTGRES_USER: postgres
 #      POSTGRES_PASSWORD: postgres
+  spring:
+    <<: *base
+    name: docker_spring
+    volumes:
+      - .:/myapp
+      - ./tmp/cache:/myapp/tmp/cache
+      - ./log:/myapp/log
+      - bundle_install:/myapp/vendor/bundle
+    ports: []
   mysql:
-    image: "mysql:5.6"
+    name: docker_mysql
+    image: "mysql:5.7"
     volumes:
       - mysql_db:/var/lib/mysql
     ports:
@@ -30,9 +45,15 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: password
   redis:
+    name: docker_redis
     image: "redis"
     ports:
       - "6379:6379"
+  localstack:
+    name: docker_localstack
+    image: localstack/localstack
+    ports:
+      - "4572:4572"
 volumes:
   mysql_db:
     driver: local
@@ -40,3 +61,5 @@ volumes:
 #    driver: local
   bundle_install:
     driver: local
+  sync-volume:
+    external: true
