@@ -15,6 +15,10 @@ init:
 .PHONY: up
 up: docker-sync/start docker/up
 
+.PHONY: db/up
+db/up: docker-sync/start
+	$(DOCKER_COMPOSE_COMMAND) up -d mysql redis localstack spring
+
 .PHONY: docker/up
 docker/up:
 	$(DOCKER_COMPOSE_COMMAND) up -d
@@ -36,12 +40,20 @@ rails/console:
 	$(MAKE) run COMMAND="bundle exec rails console"
 
 .PHONY: bundle
-bundle: install/bundler
+bundle: 
 	$(MAKE) run COMMAND="bundle install --path vendor/bundle -j4"
 
 .PHONY: server
 server:
 	bundle exec rails server -b 0.0.0.0 -p $(APP_PORT)
+
+.PHONY: attach
+attach:
+ifdef NAME
+	$(DOCKER_COMMAND) attach docker_$(NAME)
+else
+	$(DOCKER_COMMAND) attach docker_app
+endif
 
 .PHONY: db/init
 db/init: db/create db/migrate db/seed

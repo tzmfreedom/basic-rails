@@ -36,6 +36,7 @@ gem 'activerecord-import'
 gem 'dotenv-rails'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
+gem 'omniauth-line'
 gem 'rubocop', require: false
 gem 'draper'
 gem 'activeadmin'
@@ -44,7 +45,9 @@ gem 'redis-rails'
 gem 'mysql2'
 gem 'unicorn'
 # gem 'pg'
-
+gem 'aws-sdk', '~> 3'
+gem 'active_model_serializers'
+gem 'committee'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -80,6 +83,7 @@ group :development do
   gem 'capistrano-rbenv'
   # gem 'capistrano3-puma'
   gem 'capistrano-bundle_rsync'
+  gem 'yj'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

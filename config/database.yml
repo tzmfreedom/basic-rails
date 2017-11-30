@@ -1,16 +1,22 @@
 default: &default
-  adapter: sqlite3
-  pool: 5
+  adapter: mysql2
+  username: <%= ENV.fetch("MYSQL_USERNAME") %>
+  password: <%= ENV.fetch("MYSQL_PASSWORD") %>
+  host: <%= ENV.fetch("MYSQL_HOSTNAME") %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  database: <%= ENV.fetch("MYSQL_DATABASE") %>
   timeout: 5000
-
-test:
-  <<: *default
-  database: test
-
-production:
-  <<: *default
-  database: production
+  charset: utf8mb4
+  encoding: utf8mb4
+  collation: utf8mb4_bin
+  reconnect: false
 
 development:
   <<: *default
-  database: development
+
+test:
+  <<: *default
+
+production:
+  <<: *default
+
