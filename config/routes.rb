@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
   root 'home#index'
 
   get 'login' => 'user_sessions#new'
@@ -26,4 +24,12 @@ Rails.application.routes.draw do
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
+
+  namespace :api, defaults: { format: :json } do
+    resources :hoge, only: [:index]
+  end
+
+  resources :hoge, only: [:index]
+  post 'hoge' => 'hoge#index'
+  get 'hoge/:id' => 'hoge#index'
 end

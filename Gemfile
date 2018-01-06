@@ -57,7 +57,7 @@ group :development do
 
   gem 'better_errors'
   gem 'bullet'
-  gem 'brakeman'
+  gem 'brakeman', require: false
   gem 'stackprof'
   gem 'memory_profiler'
   gem 'rack-mini-profiler'

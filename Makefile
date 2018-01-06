@@ -40,7 +40,7 @@ rails/console:
 	$(MAKE) run COMMAND="bundle exec rails console"
 
 .PHONY: bundle
-bundle: 
+bundle:
 	$(MAKE) run COMMAND="bundle install --path vendor/bundle -j4"
 
 .PHONY: server
@@ -56,7 +56,11 @@ else
 endif
 
 .PHONY: db/init
-db/init: db/create db/migrate db/seed
+db/init: db/drop db/create db/migrate db/seed
+
+.PHONY: db/drop
+db/drop:
+	$(MAKE) run COMMAND="bundle exec rake db:drop"
 
 .PHONY: db/migrate
 db/migrate:
