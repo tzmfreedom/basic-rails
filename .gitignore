@@ -25,3 +25,6 @@
 vendor/
 docker/
 .local_repo/
+
+# Ignore application configuration
+/config/application.yml
