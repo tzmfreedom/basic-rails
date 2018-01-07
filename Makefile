@@ -72,7 +72,7 @@ db/create:
 
 .PHONY: db/seed
 db/seed:
-	$(MAKE) run COMMAND="bundle exec rake db:seed"
+	$(MAKE) run COMMAND="bundle exec rake db:seed_fu"
 
 .PHONY: deploy
 deploy:

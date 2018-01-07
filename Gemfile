@@ -45,6 +45,7 @@ group :development, :test do
   gem 'hirb'
   gem 'awesome_print'
   gem 'rubocop', require: false
+  gem 'seed-fu'
 end
 
 group :development do
