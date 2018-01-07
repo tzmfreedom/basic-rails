@@ -28,3 +28,5 @@ docker/
 
 # Ignore application configuration
 /config/application.yml
+
+.docker-sync/
