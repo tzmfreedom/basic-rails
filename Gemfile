@@ -34,6 +34,7 @@ gem 'aws-sdk', '~> 3'
 gem 'figaro'
 gem 'whenever'
 gem 'aasm'
+gem 'bootsnap', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
