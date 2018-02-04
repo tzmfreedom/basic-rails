@@ -15,6 +15,13 @@ init:
 .PHONY: up
 up: docker-sync/start docker/up
 
+.PHONY: restart
+restart: down up
+
+.PHONY: app/restart
+app/restart:
+	make run COMMAND='bundle exec rails restart'
+
 .PHONY: db/up
 db/up: docker-sync/start
 	$(DOCKER_COMPOSE_COMMAND) up -d mysql redis localstack spring
