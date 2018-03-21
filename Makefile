@@ -18,6 +18,10 @@ up: docker-sync/start docker/up
 .PHONY: restart
 restart: down up
 
+.PHONY: app/console
+app/console:
+	$(DOCKER_COMPOSE_COMMAND) exec app /bin/bash
+
 .PHONY: app/restart
 app/restart:
 	make run COMMAND='bundle exec rails restart'
@@ -54,6 +58,10 @@ bundle:
 server:
 	bundle exec rails server -b 0.0.0.0 -p $(APP_PORT)
 
+.PHONY: assets/precompile
+assets/precompile:
+	bin/rake assets:precompile
+
 .PHONY: attach
 attach:
 ifdef NAME
@@ -63,7 +71,7 @@ else
 endif
 
 .PHONY: db/init
-db/init: db/drop db/create db/migrate db/seed
+db/init: db/drop db/create db/migrate db/seed annotate
 
 .PHONY: db/drop
 db/drop:
@@ -71,7 +79,11 @@ db/drop:
 
 .PHONY: db/migrate
 db/migrate:
-	$(MAKE) run COMMAND="bundle exec rake db:migrate; bundle exec annotate"
+	$(MAKE) run COMMAND="bundle exec rake db:migrate"
+
+.PHONY: annotate
+annotate:
+	$(MAKE) run COMMAND="bundle exec annotate"
 
 .PHONY: db/create
 db/create:
