@@ -4,14 +4,15 @@ services:
     container_name: docker_app
     build: .
     volumes:
-      - .:/myapp
-      - ./tmp/cache:/myapp/tmp/cache
-      - ./log:/myapp/log
+      - ./:/myapp
       - bundle_install:/myapp/vendor/bundle
-#      - sync-volume:/myapp
+      - tmp_cache:/myapp/tmp/cache
     ports:
       - "3000:3000"
+    stdin_open: true
+    tty: true
     environment:
+      BUNDLE_APP_CONFIG: /myapp/.bundle
       MYSQL_USERNAME: root
       MYSQL_PASSWORD: password
       MYSQL_HOSTNAME: mysql
@@ -51,11 +52,11 @@ services:
     ports:
       - "4572:4572"
 volumes:
+  tmp_cache:
+    driver: local
   mysql_db:
     driver: local
 #  postgres_db:
 #    driver: local
   bundle_install:
     driver: local
-  sync-volume:
-    external: true

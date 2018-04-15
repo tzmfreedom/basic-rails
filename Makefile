@@ -13,7 +13,7 @@ init:
 	$(MAKE) db/init
 
 .PHONY: up
-up: docker-sync/start docker/up
+up: docker/up
 
 .PHONY: restart
 restart: down up
@@ -27,7 +27,7 @@ app/restart:
 	make run COMMAND='bundle exec rails restart'
 
 .PHONY: db/up
-db/up: docker-sync/start
+db/up:
 	$(DOCKER_COMPOSE_COMMAND) up -d mysql redis localstack spring
 
 .PHONY: docker/up
@@ -110,19 +110,6 @@ endif
 .PHONY: guard
 guard:
 	$(MAKE) run COMMAND="bundle exec guard"
-
-.PHONY: docker-sync
-docker-sync:
-ifeq ($(shell command -v docker-sync),)
-	gem install docker-sync
-	brew install unison
-	brew tap eugenmayer/dockersync
-	brew install eugenmayer/dockersync/unox
-endif
-
-.PHONY: docker-sync/start
-docker-sync/start: docker-sync
-	-@docker-sync start
 
 .PHONY: logs
 logs:
