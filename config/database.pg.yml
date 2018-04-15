@@ -1,5 +1,5 @@
 default: &default
-  adapter: pg
+  adapter: postgresql
   username: <%= ENV.fetch("POSTGRES_USERNAME", "") %>
   password: <%= ENV.fetch("POSTGRES_PASSWORD", "") %>
   host: <%= ENV.fetch("POSTGRES_HOSTNAME", "") %>
