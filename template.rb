@@ -1,3 +1,5 @@
+source_paths << File.expand_path('.', __dir__)
+
 gem 'redis-rails'
 if yes?('db: mysql?')
   gem 'mysql2'
