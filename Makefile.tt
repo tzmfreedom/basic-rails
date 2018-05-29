@@ -1,0 +1,107 @@
+DOCKER_COMPOSE_SUB_COMMAND = down start stop build
+DOCKER_COMPOSE_COMMAND = docker-compose
+DOCKER_COMMAND = docker
+APP_PORT := 3000
+RUBY_VERSION := $(shell cat .ruby-version)
+
+.PHONY: test
+test:
+	$(MAKE) run COMMAND="make test"
+
+.PHONY: init
+init:
+	$(MAKE) db/init
+
+.PHONY: up
+up: docker/up
+
+.PHONY: restart
+restart: down up
+
+.PHONY: app/console
+app/console:
+	$(DOCKER_COMPOSE_COMMAND) exec app /bin/bash
+
+.PHONY: app/restart
+app/restart:
+	make run COMMAND='bundle exec rails restart'
+
+.PHONY: db/up
+db/up:
+	$(DOCKER_COMPOSE_COMMAND) up -d mysql redis localstack spring
+
+.PHONY: docker/up
+docker/up:
+	$(DOCKER_COMPOSE_COMMAND) up -d
+
+.PHONY: $(DOCKER_COMPOSE_SUB_COMMAND)
+$(DOCKER_COMPOSE_SUB_COMMAND):
+	$(DOCKER_COMPOSE_COMMAND) $@
+
+.PHONY: run
+run:
+	$(DOCKER_COMPOSE_COMMAND) exec spring $(COMMAND)
+
+.PHONY: console
+console:
+	$(MAKE) run COMMAND="/bin/bash"
+
+.PHONY: rails/console
+rails/console:
+	$(MAKE) run COMMAND="bundle exec rails console"
+
+.PHONY: bundle
+bundle:
+	$(MAKE) run COMMAND="bundle install --path vendor/bundle -j4"
+
+.PHONY: server
+server:
+	bundle exec rails server -b 0.0.0.0 -p $(APP_PORT)
+
+.PHONY: assets/precompile
+assets/precompile:
+	bin/rake assets:precompile
+
+.PHONY: attach
+attach:
+ifdef NAME
+	$(DOCKER_COMMAND) attach docker_$(NAME)
+else
+	$(DOCKER_COMMAND) attach docker_app
+endif
+
+.PHONY: db/init
+db/init: db/drop db/create db/migrate db/seed annotate
+
+.PHONY: db/drop
+db/drop:
+	$(MAKE) run COMMAND="bin/rake db:drop"
+
+.PHONY: db/migrate
+db/migrate:
+	$(MAKE) run COMMAND="bin/rake db:migrate"
+
+.PHONY: annotate
+annotate:
+	$(MAKE) run COMMAND="bundle exec annotate"
+
+.PHONY: db/create
+db/create:
+	$(MAKE) run COMMAND="bin/rake db:create"
+
+.PHONY: db/seed
+db/seed:
+	$(MAKE) run COMMAND="bin/rake db:seed_fu"
+
+.PHONY: guard
+guard:
+	$(MAKE) run COMMAND="bundle exec guard"
+
+.PHONY: logs
+logs:
+ifdef NAME
+	$(DOCKER_COMPOSE_COMMAND) logs -f $(NAME)
+else
+	$(DOCKER_COMPOSE_COMMAND) logs -f app
+endif
+
