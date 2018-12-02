@@ -36,6 +36,12 @@ gem 'whenever'
 gem 'aasm'
 gem 'bootsnap', require: false
 gem 'rack-cors', require: 'rack/cors'
+# gem 'racli'
+# gem 'spring-commands-racli', github: 'tzmfreedom/spring-commands-racli'
+# gem 'ahoy_matey'
+gem 'ransack'
+gem 'rails_event_store'
+gem 'rails_event_store-browser'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -75,6 +81,7 @@ group :development do
   gem 'capistrano-rbenv'
   # gem 'capistrano3-puma'
   gem 'capistrano-bundle_rsync'
+#  gem 'hologram'
 end
 
 group :test do
