@@ -34,6 +34,31 @@ module BasicRails
     config.i18n.default_locale = :ja
     config.time_zone = 'Asia/Tokyo'
 
+    config.action_controller.include_all_helpers = false
+
+    config.generators.stylesheets = false
+    config.generators.javascripts = false
+    config.generators.helper      = false
+
+    # config.generators do |g|
+    #   g.factory_bot dir: 'spec/factories'
+    #   g.fixture_replacement :factory_bot, dir: 'spec/factories'
+    #   g.test_framework :rspec, view_specs: false,
+    #                            helper_specs: false,
+    #                            controller_specs: false,
+    #                            routing_specs: false
+    # end
+
+    config.paths.add 'lib', eager_load: true
+
+    # config.middleware.insert_before 0, Rack::Cors do
+    #   allow do
+    #     origin = ENV['CORS_ORIGIN'] || 'mylish.jp'
+    #     origins origin
+    #     resource '/xxx', headers: :any, methods: %i[post]
+    #   end
+    # end
+
     # class HogeMiddleWare
     #   def initialize(app)
     #     @app = app
